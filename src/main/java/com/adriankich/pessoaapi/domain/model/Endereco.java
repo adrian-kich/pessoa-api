@@ -4,6 +4,8 @@ import com.adriankich.pessoaapi.domain.enums.EnderecoType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -39,6 +41,26 @@ public class Endereco {
     private EnderecoType type;
 
     @ManyToOne
-    @JoinColumn(name = "ref_pessoa")
+    @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
+
+    @Column(name = "criado_em",
+            updatable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado_em",
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private LocalDateTime atualizadoEm;
+
+    @PrePersist
+    protected void onCreate() {
+        this.criadoEm = LocalDateTime.now();
+        this.atualizadoEm = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.atualizadoEm = LocalDateTime.now();
+    }
 }
