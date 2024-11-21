@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Setter
 @Getter
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class Endereco {
     private String rua;
 
     @Column(nullable = false)
-    private Long numero;
+    private String numero;
 
     @Column(nullable = false)
     private String bairro;
