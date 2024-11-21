@@ -5,9 +5,11 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class Pessoa {
     @Column(nullable = false)
     private String nome;
 
-    @Column(name = "dt_nascimento")
+    @Column(name = "dt_nascimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private LocalDate dtNascimento;
 
@@ -52,5 +54,9 @@ public class Pessoa {
     @PreUpdate
     protected void onUpdate() {
         this.atualizadoEm = LocalDateTime.now();
+    }
+
+    public int getIdade() {
+        return Period.between(this.dtNascimento, LocalDate.now()).getYears();
     }
 }
