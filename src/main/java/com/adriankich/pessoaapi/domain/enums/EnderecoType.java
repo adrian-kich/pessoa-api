@@ -20,7 +20,6 @@ public enum EnderecoType {
     public static EnderecoType fromValue(int value) {
         return Arrays.stream(EnderecoType.values())
                 .filter(tipo -> tipo.getValue() == value)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Código inválido para o tipo de endereço: " + value));
+                .findFirst().orElse(null);
     }
 }

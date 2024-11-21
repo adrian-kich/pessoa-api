@@ -9,6 +9,9 @@ import com.adriankich.pessoaapi.infrastructure.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
+
 @Service
 public class EnderecoService {
 
@@ -35,7 +38,10 @@ public class EnderecoService {
                 .estado(enderecoRequestDTO.estado())
                 .cep(enderecoRequestDTO.cep())
                 .type(EnderecoType.fromValue(enderecoRequestDTO.type()) == null
-                        ? EnderecoType.PRINCIPAL : EnderecoType.fromValue(enderecoRequestDTO.type()))
+                        ? checkType(pessoa.getId())
+                        : EnderecoType.fromValue(enderecoRequestDTO.type()) == EnderecoType.SECUNDARIO
+                        ? checkType(pessoa.getId())
+                        : setPrincipalType(pessoa.getId()))
                 .build();
 
         return addEndereco(endereco);
@@ -44,13 +50,19 @@ public class EnderecoService {
     public Endereco updateEndereco(Long id, EnderecoRequestDTO enderecoRequestDTO) {
         Endereco endereco = getEnderecoById(id);
 
+        Pessoa pessoa = endereco.getPessoa();
+
         endereco.setRua(enderecoRequestDTO.rua());
         endereco.setNumero(enderecoRequestDTO.numero());
         endereco.setBairro(enderecoRequestDTO.bairro());
         endereco.setCidade(enderecoRequestDTO.cidade());
         endereco.setEstado(enderecoRequestDTO.estado());
         endereco.setCep(enderecoRequestDTO.cep());
-        endereco.setType(EnderecoType.fromValue(enderecoRequestDTO.type()));
+        endereco.setType(EnderecoType.fromValue(enderecoRequestDTO.type()) == null
+                ? checkUpdateType(pessoa.getId(), id)
+                : EnderecoType.fromValue(enderecoRequestDTO.type()) == EnderecoType.SECUNDARIO
+                ? checkUpdateType(pessoa.getId(), id)
+                : setPrincipalType(pessoa.getId()));
 
         enderecoRepository.save(endereco);
         return endereco;
@@ -61,7 +73,40 @@ public class EnderecoService {
         enderecoRepository.deleteById(id);
     }
 
-    public void checkType() {
+    public EnderecoType checkType(Long pessoaId) {
+        List<Endereco> enderecos = enderecoRepository.findByPessoaId(pessoaId);
 
+        if(!enderecos.isEmpty()) {
+            if(enderecos.stream()
+                    .anyMatch(endereco -> endereco.getType().getValue() == EnderecoType.PRINCIPAL.getValue())) {
+                return EnderecoType.SECUNDARIO;
+            }
+        }
+        return EnderecoType.PRINCIPAL;
+    }
+
+    public EnderecoType checkUpdateType(Long pessoaId, Long id) {
+        List<Endereco> enderecos = enderecoRepository.findByPessoaId(pessoaId);
+
+        if(!enderecos.isEmpty()) {
+            if(enderecos.stream()
+                    .anyMatch(endereco -> endereco.getType().getValue() == EnderecoType.PRINCIPAL.getValue()
+                            && !Objects.equals(endereco.getId(), id))) {
+                return EnderecoType.SECUNDARIO;
+            }
+        }
+        return EnderecoType.PRINCIPAL;
+    }
+
+    public EnderecoType setPrincipalType(Long pessoaId) {
+        List<Endereco> enderecos = enderecoRepository.findByPessoaId(pessoaId);
+
+        if(!enderecos.isEmpty()) {
+            enderecos.forEach(endereco -> {
+                endereco.setType(EnderecoType.SECUNDARIO);
+                enderecoRepository.save(endereco);
+            });
+        }
+        return EnderecoType.PRINCIPAL;
     }
 }
