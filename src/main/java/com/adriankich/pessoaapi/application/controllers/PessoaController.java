@@ -4,6 +4,7 @@ import com.adriankich.pessoaapi.application.dto.request.EnderecoRequestDTO;
 import com.adriankich.pessoaapi.application.dto.request.PessoaRequestDTO;
 import com.adriankich.pessoaapi.application.dto.request.UpdatePessoaDTO;
 import com.adriankich.pessoaapi.application.dto.response.PessoaResponseDTO;
+import com.adriankich.pessoaapi.application.swagger.PessoaSwagger;
 import com.adriankich.pessoaapi.domain.mapper.PessoaMapper;
 import com.adriankich.pessoaapi.domain.service.PessoaService;
 import jakarta.validation.Valid;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
-public class PessoaController {
+public class PessoaController implements PessoaSwagger {
 
     @Autowired
     private PessoaService pessoaService;

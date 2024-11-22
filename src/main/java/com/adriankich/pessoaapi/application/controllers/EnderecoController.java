@@ -2,6 +2,7 @@ package com.adriankich.pessoaapi.application.controllers;
 
 import com.adriankich.pessoaapi.application.dto.request.EnderecoRequestDTO;
 import com.adriankich.pessoaapi.application.dto.response.EnderecoResponseDTO;
+import com.adriankich.pessoaapi.application.swagger.EnderecoSwagger;
 import com.adriankich.pessoaapi.domain.mapper.EnderecoMapper;
 import com.adriankich.pessoaapi.domain.service.EnderecoService;
 import jakarta.validation.Valid;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/enderecos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class EnderecoController {
+public class EnderecoController implements EnderecoSwagger {
 
     @Autowired
     private EnderecoService enderecoService;
