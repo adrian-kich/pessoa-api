@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "dfcfaf5f-67d2-414c-a1c4-0501a0ddcb9e",
+		"name": "Pessoa api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33623606"
+	},
+	"item": [
+		{
+			"name": "Criar Pessoa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Adrian Kich\",\r\n    \"cpf\": \"03116037000\",\r\n    \"dtNascimento\": \"2001-10-26\",\r\n    \"enderecos\": [\r\n        {\r\n            \"rua\": \"rua 1\",\r\n            \"numero\": \"300\",\r\n            \"bairro\": \"bairro 1\",\r\n            \"cidade\": \"cidade 1\",\r\n            \"estado\": \"estado 1\",\r\n            \"cep\": \"123456789\",\r\n            \"type\": 1\r\n        },\r\n                {\r\n            \"rua\": \"rua 2\",\r\n            \"numero\": \"400\",\r\n            \"bairro\": \"bairro 2\",\r\n            \"cidade\": \"cidade 2\",\r\n            \"estado\": \"estado 2\",\r\n            \"cep\": \"123456489\",\r\n            \"type\": 0\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Pessoas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas?page=0&size=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Pessoa por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Pessoa",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"nome\": \"Adrian Gabriel Kich\",\r\n        \"cpf\": \"03116037000\",\r\n        \"dtNascimento\": \"2001-10-26\"\r\n   } ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Endereço",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rua\": \"rua 2\",\r\n    \"numero\": \"302\",\r\n    \"bairro\": \"bairro 2\",\r\n    \"cidade\": \"cidade 1\",\r\n    \"estado\": \"estado 1\",\r\n    \"cep\": \"123456789\",\r\n    \"type\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/enderecos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar Endereço",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rua\": \"Rua 1\",\r\n    \"numero\": \"400\",\r\n    \"bairro\": \"bairro 1\",\r\n    \"cidade\": \"cidade 1\",\r\n    \"estado\": \"estado 1\",\r\n    \"cep\": \"123456789\",\r\n    \"type\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas/1/enderecos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1",
+						"enderecos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Pessoa",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Adrian Kich\",\r\n    \"cpf\": \"03116037000\",\r\n    \"dtNascimento\": \"26/10/2001\",\r\n    \"enderecos\": [\r\n        {\r\n            \"rua\": \"rua 1\",\r\n            \"numero\": 300,\r\n            \"bairro\": \"bairro 1\",\r\n            \"cidade\": \"cidade 1\",\r\n            \"estado\": \"estado 1\",\r\n            \"cep\": \"123456789\",\r\n            \"type\": 1\r\n        },\r\n                {\r\n            \"rua\": \"rua 2\",\r\n            \"numero\": 300,\r\n            \"bairro\": \"bairro 2\",\r\n            \"cidade\": \"cidade 2\",\r\n            \"estado\": \"estado 2\",\r\n            \"cep\": \"123456489\",\r\n            \"type\": 0\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Endereço",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rua\": \"rua 123112\",\r\n    \"numero\": \"302\",\r\n    \"bairro\": \"bairro 2\",\r\n    \"cidade\": \"cidade 1\",\r\n    \"estado\": \"estado 1\",\r\n    \"cep\": \"123456789\",\r\n    \"type\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/enderecos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
