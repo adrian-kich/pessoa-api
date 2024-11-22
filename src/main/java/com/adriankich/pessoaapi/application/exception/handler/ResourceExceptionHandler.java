@@ -63,7 +63,7 @@ public interface ResourceExceptionHandler<T extends Exception> {
         ValidationError error = ValidationError.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
-                .error(ex.getClass().getName())
+                .error("Erro na validação dos campos")
                 .fields(fields)
                 .fieldsMessage(fieldsMessage)
                 .path(request.getRequestURI())

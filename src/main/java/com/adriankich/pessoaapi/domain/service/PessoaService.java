@@ -43,13 +43,13 @@ public class PessoaService {
                 .dtNascimento(pessoaRequestDTO.dtNascimento())
                 .build();
 
-        pessoaRepository.save(pessoa);
+        Pessoa savedPessoa = pessoaRepository.save(pessoa);
 
         pessoa.setEnderecos(pessoaRequestDTO.enderecos().stream()
                 .map(enderecoRequestDTO -> enderecoService.createEndereco(pessoa, enderecoRequestDTO))
                 .toList());
 
-        return pessoa;
+        return savedPessoa;
     };
 
     public Pessoa updatePessoa(Long id, UpdatePessoaDTO updatePessoaDTO) {
@@ -65,8 +65,7 @@ public class PessoaService {
         pessoa.setCpf(cpf);
         pessoa.setDtNascimento(updatePessoaDTO.dtNascimento());
 
-        pessoaRepository.save(pessoa);
-        return pessoa;
+        return pessoaRepository.save(pessoa);
     }
 
     public void deletePessoa(Long id) {

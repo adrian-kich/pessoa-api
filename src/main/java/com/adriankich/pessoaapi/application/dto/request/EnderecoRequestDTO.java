@@ -2,25 +2,26 @@ package com.adriankich.pessoaapi.application.dto.request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record EnderecoRequestDTO(
-        @NotNull(message = "É obrigatório informar uma rua.")
+        @NotBlank(message = "É obrigatório informar uma rua.")
         String rua,
 
-        @NotNull(message = "É obrigatório informar um número.")
+        @NotBlank(message = "É obrigatório informar um número.")
         String numero,
 
-        @NotNull(message = "É obrigatório informar um bairro.")
+        @NotBlank(message = "É obrigatório informar um bairro.")
         String bairro,
 
-        @NotNull(message = "É obrigatório informar uma cidade.")
+        @NotBlank(message = "É obrigatório informar uma cidade.")
         String cidade,
 
-        @NotNull(message = "É obrigatório informar um estado.")
+        @NotBlank(message = "É obrigatório informar um estado.")
         String estado,
 
-        @NotNull(message = "É obrigatório informar um CEP.")
+        @NotBlank(message = "É obrigatório informar um CEP.")
         String cep,
 
         @Min(value = 0, message = "O tipo deve ser 0 ou 1.")

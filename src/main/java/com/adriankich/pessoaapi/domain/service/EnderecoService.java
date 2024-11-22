@@ -24,8 +24,7 @@ public class EnderecoService {
     }
 
     public Endereco addEndereco(Endereco endereco) {
-        enderecoRepository.save(endereco);
-        return endereco;
+        return enderecoRepository.save(endereco);
     }
 
     public Endereco createEndereco(Pessoa pessoa, EnderecoRequestDTO enderecoRequestDTO) {
@@ -64,8 +63,7 @@ public class EnderecoService {
                 ? checkUpdateType(pessoa.getId(), id)
                 : setPrincipalType(pessoa.getId()));
 
-        enderecoRepository.save(endereco);
-        return endereco;
+        return enderecoRepository.save(endereco);
     }
 
     public void deleteEndereco(Long id) {
