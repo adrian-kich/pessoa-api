@@ -19,6 +19,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -47,13 +51,18 @@ public class PessoaServiceTest {
     @Test
     void testGetAllPessoas_ReturnsListOfPessoas() {
         Pessoa pessoa = PessoaStub.createPessoaWithoutId();
-        Mockito.when(pessoaRepository.findAll()).thenReturn(List.of(pessoa));
+        Pageable pageable = PageRequest.of(0, 1);
 
-        List<Pessoa> result = pessoaService.getAllPessoas();
+        Page<Pessoa> page = new PageImpl<>(List.of(pessoa, pessoa), pageable, 2);
+
+        Mockito.when(pessoaRepository.findAll(pageable)).thenReturn(page);
+
+        Page<Pessoa> result = pessoaService.getAllPessoas(pageable);
 
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals(Pessoa.class, result.get(0).getClass());
+        Assertions.assertEquals(2, result.getTotalElements());
+        Assertions.assertEquals(2, result.getTotalPages());
+        Assertions.assertEquals(Pessoa.class, result.getContent().get(0).getClass());
     }
 
     @Test

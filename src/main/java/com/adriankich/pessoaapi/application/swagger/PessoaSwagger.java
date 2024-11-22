@@ -5,13 +5,13 @@ import com.adriankich.pessoaapi.application.dto.request.PessoaRequestDTO;
 import com.adriankich.pessoaapi.application.dto.request.UpdatePessoaDTO;
 import com.adriankich.pessoaapi.application.dto.response.PessoaResponseDTO;
 import com.adriankich.pessoaapi.application.exception.StandardError;
-import com.adriankich.pessoaapi.domain.model.Pessoa;
 import com.adriankich.pessoaapi.infrastructure.config.SwaggerConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +38,7 @@ public interface PessoaSwagger {
                 )
         }
     )
-    public ResponseEntity<List<PessoaResponseDTO>> getAllPessoas();
+    public ResponseEntity<List<PessoaResponseDTO>> getAllPessoas(Pageable pageable);
 
     @Operation(
             operationId = "buscar pessoa",

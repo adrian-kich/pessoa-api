@@ -8,9 +8,10 @@ import com.adriankich.pessoaapi.domain.exception.NotFoundException;
 import com.adriankich.pessoaapi.domain.model.Pessoa;
 import com.adriankich.pessoaapi.infrastructure.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +28,8 @@ public class PessoaService {
                 .orElseThrow(() -> new NotFoundException("Não foi encontrado uma pessoa com o id: #" + id));
     }
 
-    public List<Pessoa> getAllPessoas() {
-        return pessoaRepository.findAll();
+    public Page<Pessoa> getAllPessoas(Pageable pageable) {
+        return pessoaRepository.findAll(pageable);
     }
 
     public Pessoa createPessoa(PessoaRequestDTO pessoaRequestDTO) {

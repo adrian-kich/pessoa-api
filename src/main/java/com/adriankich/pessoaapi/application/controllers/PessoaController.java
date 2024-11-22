@@ -9,6 +9,7 @@ import com.adriankich.pessoaapi.domain.mapper.PessoaMapper;
 import com.adriankich.pessoaapi.domain.service.PessoaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class PessoaController implements PessoaSwagger {
     private PessoaService pessoaService;
 
     @GetMapping
-    public ResponseEntity<List<PessoaResponseDTO>> getAllPessoas() {
-        return ResponseEntity.ok(pessoaService.getAllPessoas().stream()
+    public ResponseEntity<List<PessoaResponseDTO>> getAllPessoas(Pageable pageable) {
+        return ResponseEntity.ok(pessoaService.getAllPessoas(pageable).getContent().stream()
                 .map(PessoaMapper::entityToDto).toList());
     }
 
