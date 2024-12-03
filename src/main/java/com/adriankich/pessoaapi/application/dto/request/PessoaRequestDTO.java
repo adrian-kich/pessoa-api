@@ -2,10 +2,7 @@ package com.adriankich.pessoaapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -19,6 +16,10 @@ public record PessoaRequestDTO(
         @CPF(message = "O CPF informado é inválido.")
         @NotBlank(message = "O CPF é obrigatório.")
         String cpf,
+
+        @Email(message = "O email informado é inválido.")
+        @NotBlank(message = "O email é obrigatório.")
+        String email,
 
         @NotNull(message = "A data de nascimento é obrigatória")
         @PastOrPresent(message = "A data de nascimento não deve ser uma data futura.")

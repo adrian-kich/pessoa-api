@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PessoaController implements PessoaSwagger {
@@ -52,6 +53,13 @@ public class PessoaController implements PessoaSwagger {
                                                          @RequestBody @Valid EnderecoRequestDTO enderecoRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(PessoaMapper.entityToDto(
                 pessoaService.addEndereco(id, enderecoRequestDTO)));
+    }
+
+    @GetMapping("/{id}/verify")
+    public ResponseEntity<Void> verify(@PathVariable Long id) {
+        pessoaService.verifyPessoa(id);
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

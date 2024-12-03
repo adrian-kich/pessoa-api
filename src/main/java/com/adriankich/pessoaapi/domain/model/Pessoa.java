@@ -1,5 +1,6 @@
 package com.adriankich.pessoaapi.domain.model;
 
+import com.adriankich.pessoaapi.domain.enums.PessoaState;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,10 +32,16 @@ public class Pessoa {
     private LocalDate dtNascimento;
 
     @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private PessoaState state;
 
     @Column(name = "criado_em",
             updatable = false,
