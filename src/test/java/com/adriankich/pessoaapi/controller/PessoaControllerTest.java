@@ -74,7 +74,7 @@ public class PessoaControllerTest {
 
     @Test
     void testCreatePessoa_ReturnBadRequest400WithoutRequiredFields() throws Exception {
-        PessoaRequestDTO pessoaRequestDTO = new PessoaRequestDTO("", "", LocalDate.now(), new ArrayList<>());
+        PessoaRequestDTO pessoaRequestDTO = new PessoaRequestDTO("", "", "", LocalDate.now(), new ArrayList<>());
 
         mockMvc.perform(post(PATH)
                     .contentType(MediaType.APPLICATION_JSON)

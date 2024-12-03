@@ -6,6 +6,7 @@ import com.adriankich.pessoaapi.domain.exception.CpfAlreadyUsedException;
 import com.adriankich.pessoaapi.domain.exception.NotFoundException;
 import com.adriankich.pessoaapi.domain.model.Endereco;
 import com.adriankich.pessoaapi.domain.model.Pessoa;
+import com.adriankich.pessoaapi.domain.service.EmailService;
 import com.adriankich.pessoaapi.domain.service.EnderecoService;
 import com.adriankich.pessoaapi.domain.service.PessoaService;
 import com.adriankich.pessoaapi.infrastructure.repository.PessoaRepository;
@@ -36,6 +37,9 @@ public class PessoaServiceTest {
 
     @Mock
     private EnderecoService enderecoService;
+
+    @Mock
+    private EmailService emailService;
 
     @Mock
     private PessoaRepository pessoaRepository;

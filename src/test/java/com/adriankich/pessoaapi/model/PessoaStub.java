@@ -48,6 +48,7 @@ public class PessoaStub {
         return new PessoaRequestDTO(
                 "Adrian Kich",
                 "03116037000",
+                "email@gmail.com",
                 LocalDate.of(2001, 10, 26),
                 List.of(new EnderecoRequestDTO(
                         "Rua 1",
